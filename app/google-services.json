@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "309840387968",
+    "project_id": "blogfrog-6ba12",
+    "storage_bucket": "blogfrog-6ba12.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:309840387968:android:90f4a07f48e6a05db22b65",
+        "android_client_info": {
+          "package_name": "com.example.blogfrog"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCTBFFryowqFhsSYP5HRgtRMFhSNv97fxk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
