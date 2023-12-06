@@ -3,14 +3,11 @@ package com.example.blogfrog;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.media.Image;
 import android.os.Bundle;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -39,13 +36,13 @@ public class MainActivity extends AppCompatActivity {
         mAuth = FirebaseAuth.getInstance();
         logInButton = (Button) findViewById(R.id.logInButtonEt);
         createActButton = (Button) findViewById(R.id.signUpButtonEt);
-        emailField = (EditText) findViewById(R.id.loginEmailEt);
-        passwordField = (EditText) findViewById(R.id.loginPasswordEt);
+        emailField = (EditText) findViewById(R.id.logInEmailEt);
+        passwordField = (EditText) findViewById(R.id.logInPasswordEt);
 
         mAuthListener = new FirebaseAuth.AuthStateListener() {
             @Override
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
-                FirebaseUser mUser = firebaseAuth.getCurrentUser();
+                mUser = firebaseAuth.getCurrentUser();
 
                 if (mUser != null) {
                     Toast.makeText(MainActivity.this, "Signed In", Toast.LENGTH_LONG).show();
@@ -91,9 +88,18 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
+
     @Override
     protected void onStart() {
         super.onStart();
         mAuth.addAuthStateListener(mAuthListener);
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        if (mAuthListener != null) {
+            mAuth.removeAuthStateListener(mAuthListener);
+        }
     }
 }

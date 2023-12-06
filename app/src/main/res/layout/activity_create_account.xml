@@ -4,13 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
-
-
-    <!--
-    Font family: Rubik
-    Line height: 28sp
-    -->
+    tools:context=".CreateAccount">
 
 
     <ImageView
@@ -41,14 +35,14 @@
         app:srcCompat="@drawable/ellipse" />
 
     <TextView
-        android:id="@+id/welcome_bac"
+        android:id="@+id/create_acc"
         android:layout_width="199dp"
         android:layout_height="58dp"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
         android:fontFamily="@font/rubik"
         android:gravity="top"
-        android:text="@string/welcome_bac"
+        android:text="@string/create_acc"
         android:textAppearance="@style/welcome_bac"
         android:translationX="44dp"
         android:translationY="90dp"
@@ -61,7 +55,7 @@
         app:lineHeight="24sp" />
 
     <EditText
-        android:id="@+id/logInEmailEt"
+        android:id="@+id/emailAct"
         android:layout_width="325dp"
         android:layout_height="wrap_content"
         android:ems="10"
@@ -71,13 +65,12 @@
         android:translationY="-12dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.511"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ellipse_2"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintTop_toBottomOf="@+id/usernameAct"
+        app:layout_constraintVertical_bias="0.092" />
 
     <EditText
-        android:id="@+id/logInPasswordEt"
+        android:id="@+id/passwordAct"
         android:layout_width="325dp"
         android:layout_height="wrap_content"
         android:ems="10"
@@ -87,11 +80,11 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/logInEmailEt"
+        app:layout_constraintTop_toBottomOf="@+id/emailAct"
         app:layout_constraintVertical_bias="0.031" />
 
     <Button
-        android:id="@+id/logInButtonEt"
+        android:id="@+id/createAccountAct"
         android:layout_width="150dp"
         android:layout_height="45dp"
         android:background="@drawable/rectangle_9"
@@ -105,7 +98,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/logInPasswordEt"
+        app:layout_constraintTop_toBottomOf="@+id/passwordAct"
         app:layout_constraintVertical_bias="0.132" />
 
     <ImageView
@@ -116,7 +109,7 @@
         android:layout_marginTop="16dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/logInButtonEt"
+        app:layout_constraintTop_toBottomOf="@+id/createAccountAct"
         app:layout_constraintVertical_bias="0.196"
         app:srcCompat="@drawable/divider" />
 
@@ -129,17 +122,17 @@
         android:layout_marginEnd="40dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/logInButtonEt"
+        app:layout_constraintTop_toBottomOf="@+id/createAccountAct"
         app:layout_constraintVertical_bias="0.196"
         app:srcCompat="@drawable/divider" />
 
     <Button
-        android:id="@+id/signUpButtonEt"
+        android:id="@+id/toLogIn"
         android:layout_width="335dp"
         android:layout_height="45dp"
         android:background="@drawable/rectangle_8"
         android:fontFamily="@font/rubik"
-        android:text="@string/signup_title"
+        android:text="@string/log_in_button"
         android:textAllCaps="false"
         android:textColor="@color/accent_green"
         android:textSize="16sp"
@@ -148,16 +141,29 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/orTV"
-        app:layout_constraintVertical_bias="0.117" />
+        app:layout_constraintVertical_bias="0.169" />
 
     <TextView
         android:id="@+id/orTV"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="62dp"
+        android:layout_marginTop="48dp"
         android:text="@string/or"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/logInButtonEt" />
+        app:layout_constraintTop_toBottomOf="@+id/createAccountAct" />
+
+    <EditText
+        android:id="@+id/usernameAct"
+        android:layout_width="325dp"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="@string/username"
+        android:inputType="textPersonName"
+        android:textColorHint="@color/gray"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ellipse_2" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

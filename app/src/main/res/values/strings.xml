@@ -7,6 +7,12 @@
         Welcome \nBack!
     </string>
 
+    <string name="create_acc">
+        Create \nAccount
+    </string>
+
     <string name="login_title">Continue    ></string>
     <string name="or">or</string>
+    <string name="username">Username</string>
+    <string name="log_in_button">Log in</string>
 </resources>
