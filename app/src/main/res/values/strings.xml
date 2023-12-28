@@ -15,4 +15,12 @@
     <string name="or">or</string>
     <string name="username">Username</string>
     <string name="log_in_button">Log in</string>
+    <string name="create_post">Create post</string>
+    <string name="title">Title</string>
+    <string name="title_your_post">Title your post!</string>
+    <string name="description">Description</string>
+    <string name="post_desc">Write your post description here!</string>
+    <string name="mood">Mood</string>
+    <string name="post">Post</string>
+    <string name="temp">temp</string>
 </resources>

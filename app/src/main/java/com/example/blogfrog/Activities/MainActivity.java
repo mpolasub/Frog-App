@@ -1,15 +1,19 @@
-package com.example.blogfrog;
+package com.example.blogfrog.Activities;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.example.blogfrog.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
@@ -46,6 +50,8 @@ public class MainActivity extends AppCompatActivity {
 
                 if (mUser != null) {
                     Toast.makeText(MainActivity.this, "Signed In", Toast.LENGTH_LONG).show();
+                    startActivity(new Intent(MainActivity.this, PostListActivity.class));
+                    finish();
                 } else {
                     Toast.makeText(MainActivity.this, "Not Signed In", Toast.LENGTH_LONG).show();
                 }
@@ -59,7 +65,7 @@ public class MainActivity extends AppCompatActivity {
                 if (!TextUtils.isEmpty(emailField.getText().toString())
                 && !TextUtils.isEmpty(passwordField.getText().toString())) {
                     String email = emailField.getText().toString();
-                    String pwd = emailField.getText().toString();
+                    String pwd = passwordField.getText().toString();
                     login(email, pwd);
 
                 } else {
@@ -78,6 +84,8 @@ public class MainActivity extends AppCompatActivity {
                             // Sign in success, update UI with the signed-in user's information
                             Toast.makeText(MainActivity.this, "Signed In", Toast.LENGTH_LONG).show();
 
+                            startActivity(new Intent(MainActivity.this, PostListActivity.class));
+                            finish();
                         } else {
                             // If sign in fails, display a message to the user.
                             Toast.makeText(MainActivity.this, "failed", Toast.LENGTH_LONG).show();
@@ -87,7 +95,20 @@ public class MainActivity extends AppCompatActivity {
                 });
     }
 
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        if (item.getItemId() == R.id.action_signout){
+            mAuth.signOut();
+        }
 
+        return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.main_menu, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
 
     @Override
     protected void onStart() {

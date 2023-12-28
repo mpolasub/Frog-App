@@ -10,4 +10,5 @@
     <color name="main_green">#D2E7D6</color>
     <color name="accent_green">#3A5C22</color>
     <color name="gray">#808080</color>
+    <color name="alt_gray">#A9ACA7</color>
 </resources>
