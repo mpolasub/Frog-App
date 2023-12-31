@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.blogfrog.Model.Blog;
 import com.example.blogfrog.R;
+import com.squareup.picasso.Picasso;
 
 import java.util.Date;
 import java.util.List;
@@ -48,6 +49,8 @@ public class BlogRecylerAdapter extends RecyclerView.Adapter<BlogRecylerAdapter.
         holder.timestamp.setText(blog.getTimestamp());
 
         imageUrl = blog.getImage();
+
+        Picasso.get().load(imageUrl).into(holder.image);
     }
     @Override
     public int getItemCount() {

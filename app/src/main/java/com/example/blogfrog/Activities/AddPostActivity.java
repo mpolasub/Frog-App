@@ -18,16 +18,24 @@ import android.widget.Toast;
 import com.example.blogfrog.Model.Blog;
 import com.example.blogfrog.R;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class AddPostActivity extends AppCompatActivity {
     private ImageButton mPostImage;
     private EditText mPostTitle;
     private EditText mPostDesc;
     private Button mSubmitButton;
+    private StorageReference mStorage;
     private DatabaseReference mPostDatabase;
     private FirebaseUser mUser;
     private FirebaseAuth mAuth;
@@ -44,6 +52,8 @@ public class AddPostActivity extends AppCompatActivity {
 
         mAuth = FirebaseAuth.getInstance();
         mUser = mAuth.getCurrentUser();
+        mStorage = FirebaseStorage.getInstance().getReference();
+
         mPostDatabase = FirebaseDatabase.getInstance().getReference().child("MBlog");
 
         mPostImage = (ImageButton) findViewById(R.id.imageButton);
@@ -91,16 +101,41 @@ public class AddPostActivity extends AppCompatActivity {
         String titleVal = mPostTitle.getText().toString().trim();
         String descVal = mPostDesc.getText().toString().trim();
 
-        if (!TextUtils.isEmpty(titleVal) && !TextUtils.isEmpty(descVal)) {
+        if (!TextUtils.isEmpty(titleVal) && !TextUtils.isEmpty(descVal)
+        && mImageUri != null) {
             // upload
-            Blog blog = new Blog("Title", "description", "imageurl",
-                    "timestamp", "userid");
-            mPostDatabase.setValue(blog).addOnSuccessListener(new OnSuccessListener<Void>() {
+
+            StorageReference filepath = mStorage.child("MBlog_images").
+                    child(mImageUri.getLastPathSegment());
+            filepath.putFile(mImageUri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                 @Override
-                public void onSuccess(Void unused) {
-                    Toast.makeText(getApplicationContext(), "Item added",
-                            Toast.LENGTH_LONG).show();
-                    mProgress.dismiss();
+                public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                    if (taskSnapshot.getMetadata() != null) {
+                        if (taskSnapshot.getMetadata().getReference() != null) {
+                            Task<Uri> result = taskSnapshot.getStorage().getDownloadUrl();
+                            result.addOnSuccessListener(new OnSuccessListener<Uri>() {
+                                @Override
+                                public void onSuccess(Uri uri) {
+                                    String imageUrl = uri.toString();
+                                    DatabaseReference newPost = mPostDatabase.push();
+
+                                    Map<String, String> dataToSave = new HashMap<>();
+                                    dataToSave.put("title", titleVal);
+                                    dataToSave.put("desc", descVal);
+                                    dataToSave.put("image", imageUrl);
+                                    dataToSave.put("timestamp", String.valueOf(java.lang.System.currentTimeMillis()));
+                                    dataToSave.put("userid", mUser.getUid());
+
+                                    newPost.setValue(dataToSave);
+
+                                    mProgress.dismiss();
+
+                                    startActivity(new Intent(AddPostActivity.this, PostListActivity.class));
+                                    finish();
+                                }
+                            });
+                        }
+                    }
                 }
             });
 
