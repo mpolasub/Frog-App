@@ -35,6 +35,7 @@ public class AddPostActivity extends AppCompatActivity {
     private EditText mPostTitle;
     private EditText mPostDesc;
     private Button mSubmitButton;
+    private Button mBackButton;
     private StorageReference mStorage;
     private DatabaseReference mPostDatabase;
     private FirebaseUser mUser;
@@ -60,6 +61,7 @@ public class AddPostActivity extends AppCompatActivity {
         mPostTitle = (EditText) findViewById(R.id.postTitleEt);
         mPostDesc = (EditText) findViewById(R.id.descriptionEt);
         mSubmitButton = (Button) findViewById(R.id.submitPost);
+        mBackButton = (Button) findViewById(R.id.backButton);
 
         mPostImage.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -75,6 +77,14 @@ public class AddPostActivity extends AppCompatActivity {
             public void onClick(View v) {
                 // post to db
                 startPosting();
+            }
+        });
+
+        mBackButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(AddPostActivity.this, PostListActivity.class));
+                finish();
             }
         });
 

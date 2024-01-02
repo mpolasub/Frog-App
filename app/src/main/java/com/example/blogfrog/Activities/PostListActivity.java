@@ -75,6 +75,12 @@ public class PostListActivity extends AppCompatActivity {
                     finish();
                 }
                 break;
+            case R.id.action_profile:
+                if (mUser != null && mAuth != null) {
+                    startActivity(new Intent(PostListActivity.this, ProfileActivity.class));
+                    finish();
+                }
+
         }
         return super.onOptionsItemSelected(item);
     }

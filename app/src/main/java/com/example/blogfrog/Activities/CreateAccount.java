@@ -84,6 +84,7 @@ public class CreateAccount extends AppCompatActivity {
                                 String userid = mAuth.getCurrentUser().getUid();
                                 DatabaseReference currentUserDb = mDatabaseReference.child(userid);
                                 currentUserDb.child("username").setValue(uname);
+                                currentUserDb.child("email").setValue(em);
                                 currentUserDb.child("image").setValue("none");
 
                                 mProgressDialog.dismiss();
