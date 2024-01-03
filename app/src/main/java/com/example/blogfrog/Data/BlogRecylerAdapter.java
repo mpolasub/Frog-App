@@ -51,6 +51,7 @@ public class BlogRecylerAdapter extends RecyclerView.Adapter<BlogRecylerAdapter.
         imageUrl = blog.getImage();
 
         Picasso.get().load(imageUrl).into(holder.image);
+        holder.userName.setText(blog.getUserName());
     }
     @Override
     public int getItemCount() {
@@ -63,6 +64,7 @@ public class BlogRecylerAdapter extends RecyclerView.Adapter<BlogRecylerAdapter.
         public TextView desc;
         public TextView timestamp;
         public ImageView image;
+        public TextView userName;
         String userid;
         public ViewHolder(@NonNull View view, Context ctx) {
             super(view);
@@ -73,6 +75,7 @@ public class BlogRecylerAdapter extends RecyclerView.Adapter<BlogRecylerAdapter.
             desc = (TextView) view.findViewById(R.id.postTextList);
             image = (ImageView) view.findViewById(R.id.postImageList);
             timestamp = (TextView) view.findViewById(R.id.timestampList);
+            userName = (TextView) view.findViewById(R.id.postUsername);
 
             userid = null;
 

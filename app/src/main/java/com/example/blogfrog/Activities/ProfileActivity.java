@@ -21,13 +21,14 @@ import com.google.firebase.database.FirebaseDatabase;
 public class ProfileActivity extends AppCompatActivity {
     private TextView userNameLabel;
     private TextView emailLabel;
+    private TextView idLabel;
     private Button saveButton;
     private DatabaseReference mDatabaseReference;
     private FirebaseDatabase mDatabase;
     private FirebaseAuth mAuth;
     private FirebaseUser mUser;
     private ProgressDialog mProgressDialog;
-    private String userName;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,10 +45,13 @@ public class ProfileActivity extends AppCompatActivity {
 
         userNameLabel = (TextView) findViewById(R.id.userNameDisplay);
         emailLabel = (TextView) findViewById(R.id.emailDisplay);
+        idLabel = (TextView) findViewById(R.id.idDisplay);
         saveButton = (Button) findViewById(R.id.saveProfileBt);
 
         displayEmail();
         displayUser();
+        idLabel.setText(mAuth.getCurrentUser().getUid());
+
     }
 
     private void displayUser() {

@@ -6,17 +6,19 @@ public class Blog {
     public String image;
     public String timestamp;
     public String userid;
+    public String userName;
 
     public Blog() {
 
     }
 
-    public Blog(String title, String desc, String image, String timestamp, String userid) {
+    public Blog(String title, String desc, String image, String timestamp, String userid, String userName) {
         this.title = title;
         this.desc = desc;
         this.image = image;
         this.timestamp = timestamp;
         this.userid = userid;
+        this.userName = userName;
     }
 
     public String getTitle() {
@@ -58,4 +60,11 @@ public class Blog {
     public void setUserid(String userid) {
         this.userid = userid;
     }
+    public String getUserName() {
+        return userName;
+    }
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
+
 }
