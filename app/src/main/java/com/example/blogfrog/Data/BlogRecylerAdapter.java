@@ -46,7 +46,7 @@ public class BlogRecylerAdapter extends RecyclerView.Adapter<BlogRecylerAdapter.
 
         java.text.DateFormat dateFormat = java.text.DateFormat.getDateInstance();
         String formattedDate = dateFormat.format(new Date(Long.valueOf(blog.getTimestamp())).getTime());
-        holder.timestamp.setText(blog.getTimestamp());
+        holder.timestamp.setText("Posted " + formattedDate);
 
         imageUrl = blog.getImage();
 
