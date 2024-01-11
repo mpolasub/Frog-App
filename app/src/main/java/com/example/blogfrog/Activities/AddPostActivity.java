@@ -50,6 +50,8 @@ public class AddPostActivity extends AppCompatActivity {
     private Uri mImageUri;
     private String retrievedUserName;
     private static final int GALLERY_CODE = 1;
+    private String pfpUrl;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,7 +67,8 @@ public class AddPostActivity extends AppCompatActivity {
         mPostDatabase = FirebaseDatabase.getInstance().getReference().child("MBlog");
         mDatabase = FirebaseDatabase.getInstance();
         mDatabaseReference = mDatabase.getReference().child("MUsers");
-//        mDatabaseReference.keepSynced(true);
+
+        mDatabaseReference.keepSynced(true);
 
         mPostImage = (ImageButton) findViewById(R.id.imageButton);
         mPostTitle = (EditText) findViewById(R.id.postTitleEt);
@@ -74,6 +77,9 @@ public class AddPostActivity extends AppCompatActivity {
         mBackButton = (Button) findViewById(R.id.backButton);
 
         fetchUsername();
+
+//        PFP
+        displayPfp();
 
 
         mPostImage.setOnClickListener(new View.OnClickListener() {
@@ -116,6 +122,24 @@ public class AddPostActivity extends AppCompatActivity {
         }
     }
 
+//   PFP
+    public void displayPfp() {
+        String userid = mAuth.getCurrentUser().getUid();
+        DatabaseReference currentUserDb = mDatabaseReference.child(userid);
+        currentUserDb.child("image").get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+            @Override
+            public void onComplete(@android.support.annotation.NonNull Task<DataSnapshot> task) {
+                if (!task.isSuccessful()) {
+                    Log.e("firebase", "Error getting data", task.getException());
+                    pfpUrl = "content://com.android.providers.media.documents/document/image%3A31";
+                }
+                else {
+                    Log.d("firebase", String.valueOf(task.getResult().getValue()));
+                    pfpUrl = task.getResult().getValue().toString();
+                }
+            }
+        });
+    }
 
     private void fetchUsername() {
         String userid = mAuth.getCurrentUser().getUid();
@@ -167,7 +191,8 @@ public class AddPostActivity extends AppCompatActivity {
                                     dataToSave.put("timestamp", String.valueOf(java.lang.System.currentTimeMillis()));
                                     dataToSave.put("userid", mUser.getUid());
                                     dataToSave.put("userName", retrievedUserName);
-//                                    fetchUsername(dataToSave);
+//                                    PFP
+                                    dataToSave.put("pfp", pfpUrl);
 
                                     newPost.setValue(dataToSave);
 

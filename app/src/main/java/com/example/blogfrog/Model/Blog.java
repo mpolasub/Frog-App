@@ -7,18 +7,22 @@ public class Blog {
     public String timestamp;
     public String userid;
     public String userName;
+    public String pfp;
 
     public Blog() {
 
     }
 
-    public Blog(String title, String desc, String image, String timestamp, String userid, String userName) {
+    public Blog(String title, String desc, String image, String timestamp, String userid, String userName
+                , String pfp
+    ) {
         this.title = title;
         this.desc = desc;
         this.image = image;
         this.timestamp = timestamp;
         this.userid = userid;
         this.userName = userName;
+        this.pfp = pfp;
     }
 
     public String getTitle() {
@@ -43,6 +47,14 @@ public class Blog {
 
     public void setImage(String image) {
         this.image = image;
+    }
+
+    public String getPfp() {
+        return pfp;
+    }
+
+    public void setPfp(String pfp) {
+        this.pfp = pfp;
     }
 
     public String getTimestamp() {
